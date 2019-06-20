@@ -86,7 +86,13 @@ if [ -f banner ]; then
   ui_print " " " ";
 fi;
 
-ui_print "$(file_getprop anykernel.sh kernel.string)";
+ui_print " ";
+ui_print "=================================== ";
+ui_print " ";
+ui_print " - $(file_getprop /tmp/anykernel/anykernel.sh kernel.string)";
+ui_print " ";
+ui_print "=================================== ";
+ui_print " ";
 if [ -f version ]; then
   ui_print " ";
   while IFS='' read -r line || $bb [[ -n "$line" ]]; do
@@ -94,7 +100,8 @@ if [ -f version ]; then
   done < version;
   ui_print " ";
 fi;
-ui_print " " "AnyKernel3 by osm0sis @ xda-developers" " " " ";
+ui_print " - AnyKernel3 by osm0sis ";
+ui_print " - Version: El Octavo";
 
 unmount_all;
 if [ ! "$(is_mounted /system)" ]; then
@@ -127,25 +134,25 @@ elif [ ! "$(getprop ro.product.device 2>/dev/null)" -a ! "$(getprop ro.build.pro
 fi;
 
 if [ "$(file_getprop anykernel.sh do.devicecheck)" == 1 ]; then
-  ui_print "Checking device...";
+  ui_print " - Checking device...";
   device="$(getprop ro.product.device)";
   product="$(getprop ro.build.product)";
   for testname in $(file_getprop anykernel.sh 'device.name.*'); do
     if [ "$device" == "$testname" -o "$product" == "$testname" ]; then
-      ui_print "$testname";
+      ui_print " - Supported Device: $testname";
       match=1;
       break;
     fi;
   done;
   ui_print " ";
   if [ ! "$match" ]; then
-    abort "Unsupported device. Aborting...";
+    abort "- Unsupported device. Aborting...";
   fi;
 fi;
 
 supported_ver="$(file_getprop anykernel.sh supported.versions | $bb tr -d '[:space:]')";
 if [ "$supported_ver" ]; then
-  ui_print "Checking Android version...";
+  ui_print " - Checking Android version...";
   android_ver="$(file_getprop /system/build.prop ro.build.version.release)";
   if [ "$(echo $supported_ver | $bb grep -)" ]; then
     lo_ver=$(echo $supported_ver | $bb cut -d- -f1);
@@ -165,11 +172,11 @@ if [ "$supported_ver" ]; then
     ui_print "$android_ver" " ";
   else
     ui_print " ";
-    abort "Unsupported Android version. Aborting...";
+    abort " - Unsupported Android version. Aborting...";
   fi;
 fi;
 
-ui_print "Installing...";
+ui_print " - Installing...";
 core=$($bb grep -oE 'ak.*core.sh' anykernel.sh);
 test -f tools/$core || $bb ln -s $home/tools/ak*-core.sh $home/tools/$core;
 PATH="$home/bin:$PATH" home=$home $bb ash anykernel.sh $2;
@@ -212,6 +219,7 @@ fi;
 debugging;
 
 if [ "$(file_getprop anykernel.sh do.cleanup)" == 1 ]; then
+  ui_print " - Cleaning up...";
   cleanup;
 fi;
 
@@ -220,4 +228,5 @@ test "$savedpre" && export LD_PRELOAD="$savedpre";
 
 unmount_all;
 
-ui_print " " " " "Done!";
+ui_print " - Done!";
+ui_print " - Enjoy the Dark Ages! ";
