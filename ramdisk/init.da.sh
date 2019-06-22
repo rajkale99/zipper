@@ -18,6 +18,9 @@ echo 10 > /sys/devices/system/cpu/cpufreq/pixel_smurfutil/bit_shift2
 echo 25 > /sys/devices/system/cpu/cpufreq/pixel_smurfutil/target_load1
 echo 75 > /sys/devices/system/cpu/cpufreq/pixel_smurfutil/target_load2
 
+# set min freq
+echo 652800 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+
 # cpu boost
 echo 15 > /dev/stune/top-app/schedtune.boost
 echo 15 > /dev/stune/top-app/schedtune.sched_boost
@@ -25,6 +28,10 @@ echo 30 > /sys/module/cpu_boost/parameters/dynamic_stune_boost
 echo 30 > /sys/module/cpu_boost/parameters/input_boost_ms
 echo 1 > /sys/module/cpu_boost/parameters/sched_boost_on_input
 echo 0:1401600000 1:1401600 2:1401600 3:1401600 4:1401600 5:1401600 6:1401600 7:1401600 > /sys/module/cpu_boost/parameters/input_boost_freq
+
+# read ahead
+echo 512 > /sys/block/mmcblk0/queue/read_ahead_kb 
+echo 512 > /sys/block/mmcblk1/queue/read_ahead_kb 
 
 # dynamic fsync
 echo 1 > /sys/kernel/dyn_fsync/Dyn_fsync_active
