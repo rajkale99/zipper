@@ -36,5 +36,7 @@ echo 512 > /sys/block/mmcblk1/queue/read_ahead_kb
 # dynamic fsync
 echo 1 > /sys/kernel/dyn_fsync/Dyn_fsync_active
 
+# usb fast charge
+echo 1 > /sys/kernel/fast_charge/force_fast_charge
 # tcp stuff
 sysctl -w net.ipv4.tcp_congestion_control=westwood
