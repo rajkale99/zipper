@@ -5,35 +5,27 @@ DATE := $(shell date "+%d%m%Y-%I%M")
 
 CODE := El-Octavo
 
-ZIP := $(NAME)-$(CODE)-$(DATE).zip
-EZIP := $(NAME)-$(CODE)-EAS-$(DATE).zip
-CZIP := $(NAME)-$(CODE)-Clang-$(DATE).zip
+VERSION := 4.9
+
+SZIP := $(NAME)-$(CODE)-$(VERSION)-STABLE-$(DATE).zip
+BZIP := $(NAME)-$(CODE)-$(VERSION)-BETA-$(DATE).zip
 
 
 EXCLUDE := Makefile *.git* *.jar* Dark-Ages* *placeholder*
 
-normal: $(ZIP)
-eas: $(EZIP)
-clang: $(CZIP)
+stable: $(SZIP)
+beta: $(BZIP)
 
-$(ZIP):
-	@echo "Creating ZIP: $(ZIP)"
+$(SZIP):
+	@echo "Creating ZIP: $(SZIP)"
 	@zip -r9 "$@" . -x $(EXCLUDE)
 	@echo "Generating SHA1..."
 	@sha1sum "$@" > "$@.sha1"
 	@cat "$@.sha1"
 	@echo "Done."
 
-$(EZIP):
-	@echo "Creating ZIP: $(EIP)"
-	@zip -r9 "$@" . -x $(EXCLUDE)
-	@echo "Generating SHA1..."
-	@sha1sum "$@" > "$@.sha1"
-	@cat "$@.sha1"
-	@echo "Done."
-
-$(CZIP):
-	@echo "Creating ZIP: $(CZIP)"
+$(BZIP):
+	@echo "Creating ZIP: $(BZIP)"
 	@zip -r9 "$@" . -x $(EXCLUDE)
 	@echo "Generating SHA1..."
 	@sha1sum "$@" > "$@.sha1"
