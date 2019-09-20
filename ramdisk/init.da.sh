@@ -40,3 +40,6 @@ echo 1 > /sys/kernel/dyn_fsync/Dyn_fsync_active
 echo 1 > /sys/kernel/fast_charge/force_fast_charge
 # tcp stuff
 sysctl -w net.ipv4.tcp_congestion_control=westwood
+
+# enable fingerprint boost
+echo 1 > /sys/kernel/fp_boost/enabled
