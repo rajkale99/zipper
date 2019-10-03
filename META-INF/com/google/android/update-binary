@@ -101,7 +101,7 @@ if [ -f version ]; then
   ui_print " ";
 fi;
 ui_print " - AnyKernel3 by osm0sis ";
-ui_print " - Version: El Noveno";
+ui_print " - Version: Décimo";
 
 unmount_all;
 if [ ! "$(is_mounted /system)" ]; then

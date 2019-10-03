@@ -3,7 +3,7 @@ NAME ?= Dark-Ages
 
 DATE := $(shell date "+%d%m%Y-%I%M")
 
-CODE := El-Noveno
+CODE := Décimo
 
 VERSION := 4.9
 
