@@ -11,6 +11,7 @@ do.cleanup=1
 do.cleanuponabort=0
 device.name1=vince
 supported.versions=
+supported.patchlevels=
 '; } # end properties
 
 # shell variables
@@ -26,8 +27,8 @@ ramdisk_compression=auto;
 
 ## AnyKernel file attributes
 # set permissions/ownership for included ramdisk files
-chmod -R 750 $ramdisk/*;
-chown -R root:root $ramdisk/*;
+set_perm_recursive 0 0 755 644 $ramdisk/*;
+set_perm_recursive 0 0 750 750 $ramdisk/init* $ramdisk/sbin;
 
 
 ## AnyKernel install
