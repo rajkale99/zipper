@@ -4,8 +4,8 @@ NAME ?= Dark-Ages
 DATE := $(shell date "+%d%m%Y-%I%M")
 
 CODE := Décimo
-
-VERSION := 4.9
+VERSION := 4.9-$(shell awk '/SUBLEVEL/ {print $3}' ../Makefile \
+	| head -1 | sed 's/[^0-9]*//g')
 
 SZIP := $(NAME)-$(CODE)-$(VERSION)-STABLE-$(DATE).zip
 BZIP := $(NAME)-$(CODE)-$(VERSION)-BETA-$(DATE).zip
@@ -36,4 +36,3 @@ clean:
 	@rm -vf "$(NAME)-"*.zip*
 	@rm -vf boot/zImage
 	@echo "Done."
-
