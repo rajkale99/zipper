@@ -30,5 +30,5 @@ $(BZIP):
 
 clean:
 	@rm -vf "$(NAME)-"*.zip*
-	@rm -vf boot/zImage
+	@rm -vf zImage
 	@echo "Done."
