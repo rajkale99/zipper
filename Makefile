@@ -29,6 +29,6 @@ $(BZIP):
 	@echo "Done."
 
 clean:
-	@rm -vf "$(NAME)-"*.zip*
+	@rm -vf *.zip*
 	@rm -vf zImage
 	@echo "Done."
