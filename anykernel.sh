@@ -27,7 +27,8 @@ ramdisk_compression=auto;
 
 ## AnyKernel file attributes
 # set permissions/ownership for included ramdisk files
-set_perm_recursive 0 0 750 750 $ramdisk/*;
+set_perm_recursive 0 0 755 644 $ramdisk/*;
+set_perm_recursive 0 0 750 750 $ramdisk/init* $ramdisk/sbin;
 
 
 ## AnyKernel install
@@ -35,11 +36,9 @@ dump_boot;
 
 # begin ramdisk changes
 
-# migrate from /overlay to /overlay.d to enable SAR Magisk
-if [ -d $ramdisk/overlay ]; then
-  rm -rf $ramdisk/overlay;
-fi;
-
+# init.rc
+remove_line init,rc "import /init.da.rc"
+insert_line init.rc "import /init.da.rc" after "import /init.usb.configfs.rc" "import /init.da.rc";
 # end ramdisk changes
 
 write_boot;
