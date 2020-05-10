@@ -426,4 +426,4 @@ if [ "$(file_getprop anykernel.sh do.cleanup)" == 1 ]; then
 fi;
 
 ui_print " - Done!";
-ui_print " - Enjoy the Dark Ages! ";
+ui_print " - Enjoy! ";
